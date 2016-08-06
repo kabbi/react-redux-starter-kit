@@ -29,7 +29,7 @@ const APP_ENTRY_PATHS = [
 
 webpackConfig.entry = {
   app: __DEV__ ? APP_ENTRY_PATHS.concat(
-    `webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`
+    `webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr&reload=true`
   ) : APP_ENTRY_PATHS,
   vendor: config.compiler_vendor,
 };
@@ -103,11 +103,6 @@ webpackConfig.module.loaders = [{
     cacheDirectory: true,
     plugins: ['transform-runtime'],
     presets: ['es2015', 'react', 'stage-0'],
-    env: {
-      production: {
-        presets: ['react-optimize'],
-      },
-    },
   },
 }, {
   test: /\.json$/,
