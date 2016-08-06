@@ -1,14 +1,14 @@
 // Based on: https://github.com/dayAlone/koa-webpack-hot-middleware/blob/master/index.js
-export default function applyExpressMiddleware (fn, req, res) {
-  const originalEnd = res.end
+export default function applyExpressMiddleware(fn, req, res) {
+  const originalEnd = res.end;
 
   return new Promise((resolve) => {
-    res.end = function () {
-      originalEnd.apply(this, arguments)
-      resolve(false)
-    }
-    fn(req, res, function () {
-      resolve(true)
-    })
-  })
+    res.end = function handleStreamEnd(...args) {
+      originalEnd.apply(this, args);
+      resolve(false);
+    };
+    fn(req, res, () => {
+      resolve(true);
+    });
+  });
 }

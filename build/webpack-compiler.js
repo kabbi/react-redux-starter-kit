@@ -1,35 +1,36 @@
-import webpack from 'webpack'
-import _debug from 'debug'
-import config from '../config'
+import webpack from 'webpack';
+import _debug from 'debug';
+import config from '../config';
 
-const debug = _debug('app:build:webpack-compiler')
-const DEFAULT_STATS_FORMAT = config.compiler_stats
+const debug = _debug('app:build:webpack-compiler');
+const DEFAULT_STATS_FORMAT = config.compiler_stats;
 
-export default function webpackCompiler (webpackConfig, statsFormat = DEFAULT_STATS_FORMAT) {
-  return new Promise((resolve, reject) => {
-    const compiler = webpack(webpackConfig)
+export default (webpackConfig, statsFormat = DEFAULT_STATS_FORMAT) => (
+  new Promise((resolve, reject) => {
+    const compiler = webpack(webpackConfig);
 
     compiler.run((err, stats) => {
-      const jsonStats = stats.toJson()
+      const jsonStats = stats.toJson();
 
-      debug('Webpack compile completed.')
-      debug(stats.toString(statsFormat))
+      debug('Webpack compile completed.');
+      debug(stats.toString(statsFormat));
 
       if (err) {
-        debug('Webpack compiler encountered a fatal error.', err)
-        return reject(err)
+        debug('Webpack compiler encountered a fatal error.', err);
+        reject(err);
+        return;
       } else if (jsonStats.errors.length > 0) {
-        debug('Webpack compiler encountered errors.')
-        debug(jsonStats.errors.join('\n'))
-        return reject(new Error('Webpack compiler encountered errors'))
+        debug('Webpack compiler encountered errors.');
+        debug(jsonStats.errors.join('\n'));
+        reject(new Error('Webpack compiler encountered errors'));
+        return;
       } else if (jsonStats.warnings.length > 0) {
-        debug('Webpack compiler encountered warnings.')
-        debug(jsonStats.warnings.join('\n'))
+        debug('Webpack compiler encountered warnings.');
+        debug(jsonStats.warnings.join('\n'));
       } else {
-        debug('No errors or warnings encountered.')
+        debug('No errors or warnings encountered.');
       }
-      resolve(jsonStats)
-    })
+      resolve(jsonStats);
+    });
   })
-}
-
+);

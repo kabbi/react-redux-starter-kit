@@ -1,29 +1,33 @@
 {
-  "parser"  : "babel-eslint",
-  "extends" : [
-    "standard",
-    "standard-react"
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
   ],
   "plugins": [
     "babel",
-    "react",
-    "promise"
+    "import"
   ],
-  "env"     : {
-    "browser" : true
+  "env": {
+    "browser": true
   },
   "globals" : {
-    "__DEV__"      : false,
-    "__PROD__"     : false,
-    "__DEBUG__"    : false,
+    "__DEV__": false,
+    "__PROD__": false,
+    "__DEBUG__": false,
     "__COVERAGE__" : false,
     "__BASENAME__" : false
   },
+  "settings": {
+    "import/resolver": "webpack"
+  },
   "rules": {
-    "semi" : [2, "never"],
-    "max-len": [2, 120, 2],
-    "generator-star-spacing": 0,
-    "babel/generator-star-spacing": 1,
-    "jsx-quotes": [2, "prefer-single"]
+    // Conflicts with the global names above
+    "no-underscore-dangle": "off",
+    // [kabbi] I think this is safe enough to disable this rule
+    "no-param-reassign": ["error", { "props": false }],
+    // Developer often knows better
+    "quote-props": "off",
+    // Doesnt seem to work as of now
+    "import/no-unresolved": "off"
   }
 }
