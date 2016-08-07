@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Counter.scss';
 
 export const Counter = ({ counter, onIncrement, onDoubleAsync }) => (
-  <div>
+  <div className="text-center">
     <h2 className={classes.counterContainer}>
       Counter:
       {' '}

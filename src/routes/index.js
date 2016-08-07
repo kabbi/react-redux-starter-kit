@@ -1,6 +1,6 @@
 import CoreLayout from 'layouts/CoreLayout';
-import Home from './Home';
 
+import Home from './Home';
 import makeCounterRoute from './Counter';
 
 export const createRoutes = (store) => ({
@@ -9,6 +9,8 @@ export const createRoutes = (store) => ({
   indexRoute: Home,
   childRoutes: [
     makeCounterRoute(store),
+    // eslint-disable-next-line global-require
+    !__PROD__ && require('./Devcards').default,
   ],
 });
 

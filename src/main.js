@@ -16,12 +16,6 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router,
 });
 
-if (__DEBUG__) {
-  if (window.devToolsExtension) {
-    window.devToolsExtension.open();
-  }
-}
-
 const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {

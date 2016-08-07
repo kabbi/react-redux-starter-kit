@@ -14,12 +14,13 @@ This fork has
   - added webpack support to eslint-import plugin
 - bootstrap loader and 'Lumen' bootswatch theme
 - auto-reload in case of stateless component changes in dev mode
+- added a simple [Devcards](https://github.com/bhauman/devcards)-inspired layouts and components
+- removed redux devtools autoopen
 - removed all blueprint files
 - removed most annoying comments
 
 #### TODO:
 - update code style and structure for redux modules
-- migrate devcards layouts and helpers from my other projects (simple [Devcards](https://github.com/bhauman/devcards)-inspired thing)
 - sync with upstream repo regularly
 
 ### Original Readme
